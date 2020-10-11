@@ -7,7 +7,7 @@ public class BestLoanRates
 {
     public static final Map<Integer, Float> bestRates = Map.of( 1, 5.50f, 2, 3.45f, 3, 2.67f );
 
-    public static main( String[] args )
+    public static void main( String[] args )
     {
         Scanner scanner = new Scanner( System.in );
         System.out.println( "Enter your name" );
@@ -29,11 +29,11 @@ public class BestLoanRates
         scanner.close();
     }
 
-    public static float getRates( int loanTermInYears
+    public static float getRates( int loanTermInYears )
     {
         if ( bestRates.containsKey( loanTermInYears ) )
         {
-            return bestRates( loanTermInYears );
+            return bestRates.get( loanTermInYears );
         }
         else
         {
