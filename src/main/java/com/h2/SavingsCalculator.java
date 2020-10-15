@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 
 public class SavingsCalculator {
-    private float[] credits;
-    private float[] debits;
+    private final float[] credits;
+    private final float[] debits;
 
-    public SavingsCalculator( float[] credits, float[] debits ) {
+    public SavingsCalculator(float[] credits, float[] debits) {
         this.credits = credits;
         this.debits = debits;
     }
@@ -32,26 +32,25 @@ public class SavingsCalculator {
         return sum;
     }
 
-    private static int remainingDaysInMonth( LocalDate date ) {
-        YearMonth yearMonth = YearMonth.of( date.getYear(), date.getMonth());
+    private static int remainingDaysInMonth(LocalDate date) {
+        YearMonth yearMonth = YearMonth.of(date.getYear(), date.getMonth());
 
         int totalDaysInMonth = yearMonth.lengthOfMonth();
-        int remainingDays = totalDaysInMonth - date.getDayOfMonth();
-        return remainingDays;
+        return totalDaysInMonth - date.getDayOfMonth();
     }
 
     public float calculate() {
         return sumOfCredits() - sumOfDebits();
     }
 
-    public static void main( String[] args ) {
+    public static void main(String[] args) {
         String[] creditsAsString = args[0].split(",");
         String[] debitsAsString = args[1].split(",");
 
         float[] credits = new float[creditsAsString.length];
 
         for (int i = 0; i < creditsAsString.length; i++) {
-            credits[i] = Float.parseFloat(creditsAsString[i]);            
+            credits[i] = Float.parseFloat(creditsAsString[i]);
         }
 
         float[] debits = new float[debitsAsString.length];
@@ -61,6 +60,8 @@ public class SavingsCalculator {
         }
 
         SavingsCalculator calculator = new SavingsCalculator(credits, debits);
-        float netSavings calculator.calculate();
+        float netSavings = calculator.calculate();
+
+        System.out.println("Net Savings = " + netSavings + ", remaining days in month = " + remainingDaysInMonth(LocalDate.now()));
     }
 }
